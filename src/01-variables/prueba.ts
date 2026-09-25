@@ -1,4 +1,5 @@
 import { log } from "console";
+import { Interface } from "readline";
 import { styleText } from "util";
 
 let nombre: string = "Jose";
@@ -25,7 +26,14 @@ console.log(saludoecho);
 
 console.log(styleText('bold', saludoecho));
 
-const coche = { matricula: "123456T", color: "verde", tipo:"coupe" };
+let coche = { matricula: "123456T", color: "verde", tipo:"coupe" };
+
+interface coche{
+    nombre:string;
+    edad:number;
+    dni?:string;
+
+}
 
 console.log(styleText('white',`Matricula: ${coche.matricula} y el coche es de tipo ${coche.tipo}`));
 
@@ -35,3 +43,5 @@ coche.matricula="3453245";
 coche.color="Blanco Perla";
 
 console.log(styleText('blue',`Matricula: ${coche.matricula} y el coche es de tipo ${coche.color}`));
+
+console.log(`${nombre==="david"?console.log("ha dado true"):console.log("hola")}`);
