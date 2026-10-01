@@ -28,6 +28,11 @@ console.log(styleText('bold', saludoecho));
 
 let coche = { matricula: "123456T", color: "verde", tipo:"coupe" };
 
+const persona33 ={ dni:"12345678", nombre23:"David", edad: 30}
+
+console.log(persona33);
+
+
 interface coche{
     nombre:string;
     edad:number;
