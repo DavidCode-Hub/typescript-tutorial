@@ -211,6 +211,18 @@ console.log(frase.indexOf("vestido"));
 
 //map
 
+//Filter filtra los valores
+console.log(styleText("red","funcion filter"));
+let numerosfilter= [4,5,4,1,9,5,4,8]
+
+let aprobados = numerosfilter.filter((valor:number)=>{return valor>=5})
+console.log(aprobados.length);
+
+//findIndex
+let numeros123=[1,2,3,4,5,6];
+let numerosMayor10= numeros123.findIndex((valor:number)=>{return valor>3})
+console.log(numerosMayor10);
+
 
 // foreach
 
