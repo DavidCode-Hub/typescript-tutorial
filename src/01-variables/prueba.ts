@@ -8,14 +8,14 @@ let nombre2: string = "Hola";
 console.log(nombre);
 
 function saludo(nombre: string) {
-    console.log(`Hola ${nombre}`);
+  console.log(`Hola ${nombre}`);
 }
 nombre = "david";
 
 saludo(nombre);
 
 function saludar(nombre2: string, nombre: string): string {
-    return `${nombre2} ${nombre}`
+  return `${nombre2} ${nombre}`
 }
 
 console.log("prueba de funcion saludar");
@@ -26,41 +26,41 @@ console.log(saludoecho);
 
 console.log(styleText('bold', saludoecho));
 
-let coche = { matricula: "123456T", color: "verde", tipo:"coupe" };
+let coche = { matricula: "123456T", color: "verde", tipo: "coupe" };
 
-const persona33 ={ dni:"12345678", nombre23:"David", edad: 30}
+const persona33 = { dni: "12345678", nombre23: "David", edad: 30 }
 
 console.log(persona33);
 
 
-interface coche{
-    nombre:string;
-    edad:number;
-    dni?:string;
+interface coche {
+  nombre: string;
+  edad: number;
+  dni?: string;
 
 }
 
-console.log(styleText('white',`Matricula: ${coche.matricula} y el coche es de tipo ${coche.tipo}`));
+console.log(styleText('white', `Matricula: ${coche.matricula} y el coche es de tipo ${coche.tipo}`));
 
-console.log(styleText('red',`Matricula: ${coche.matricula} y el coche es de tipo ${coche.color}`));
+console.log(styleText('red', `Matricula: ${coche.matricula} y el coche es de tipo ${coche.color}`));
 
-coche.matricula="3453245";
-coche.color="Blanco Perla";
+coche.matricula = "3453245";
+coche.color = "Blanco Perla";
 
-console.log(styleText('blue',`Matricula: ${coche.matricula} y el coche es de tipo ${coche.color}`));
+console.log(styleText('blue', `Matricula: ${coche.matricula} y el coche es de tipo ${coche.color}`));
 
-console.log(`${nombre==="david" ? console.log("ha dado true") : console.log("hola")}`); // Operador IF en una sola linea
-
-
-type Usuario = {nombre:string, direccion?:{ciudad: String}}; // Operador de acceso seguro permite escribir undefined al operador ?
+console.log(`${nombre === "david" ? console.log("ha dado true") : console.log("hola")}`); // Operador IF en una sola linea
 
 
+type Usuario = { nombre: string, direccion?: { ciudad: String } }; // Operador de acceso seguro permite escribir undefined al operador ?
+
+//Si queremos hacer una variable como opcional lo indicamos con "?"
 // Optional chaining `?.`: si `direccion` es undefined, devuelve undefined en vez de romper.
-const user1: Usuario = {nombre: "Ana", direccion: {ciudad: "Cadiz"}}; 
+const user1: Usuario = { nombre: "Ana", direccion: { ciudad: "Cadiz" } };
 
-const use2: Usuario = {nombre:"Jose"} // Si la variable/atributo de objeto es null o undifined en el campo donde esta el ? la devuelve undefined en vez de romper el programa.
+const use2: Usuario = { nombre: "Jose" } // Si la variable/atributo de objeto es null o undifined en el campo donde esta el ? la devuelve undefined en vez de romper el programa.
 
-console.log(`Direccion de ana es: ${user1.direccion?.ciudad}`|| "No se conoce" ); 
+console.log(`Direccion de ana es: ${user1.direccion?.ciudad}` || "No se conoce");
 // ?? Evalua directamente si un atributo es undifined, null ( es como que lee la base absoluta de lo que se esta evaluando)
 // || Evalua todos los campos pero dando resultdos "falsos":
 
@@ -84,9 +84,9 @@ console.log("spread objeto ->", ampliado);
 
 
 
-console.log(styleText("red","Desestructuracion de arrays"));
+console.log(styleText("red", "Desestructuracion de arrays"));
 
-const numeros2 = [4,5,6];
+const numeros2 = [4, 5, 6];
 // Desestructuración de array
 const [primero, segundo] = numeros2;
 console.log("desestructurando array ->", primero, segundo);
@@ -98,17 +98,17 @@ const { nombre: nombreUsuario, edad: edadUsuario } = base;
 console.log("desestructurando objeto ->", nombreUsuario, edadUsuario);
 
 
-type persona2 = {nombre:string,apellidos: string, edad:number}
+type persona2 = { nombre: string, apellidos: string, edad: number }
 
-const persona2 = {nombre: "Ana", apellidos:"Guitierrez", edad: 18}
+const persona2 = { nombre: "Ana", apellidos: "Guitierrez", edad: 18 }
 
-let {nombre:nombre_persona2, edad:edad_persona2}=persona2
+let { nombre: nombre_persona2, edad: edad_persona2 } = persona2
 
-console.log("Datos separados nombre:", nombre_persona2, "edad:" ,edad_persona2);
+console.log("Datos separados nombre:", nombre_persona2, "edad:", edad_persona2);
 
 
 
-console.log(styleText("red","For Of, for In"));
+console.log(styleText("red", "For Of, for In"));
 
 // for...of : recorre VALORES
 const frutas = ["manzana", "pera", "plátano"];
@@ -128,10 +128,10 @@ const array2d: number[][] = [
 
 
 // unir con "..." sirve para array, objetos, cadenas... etc
-let array1:number[] =[1,2,3,4,5]
-let array2:number[] =[6,7,8,9,0]
+let array1: number[] = [1, 2, 3, 4, 5]
+let array2: number[] = [6, 7, 8, 9, 0]
 
-let array3: number[]=[...array1,...array2];
+let array3: number[] = [...array1, ...array2];
 
 //La regla anterior vale con primitivos (number, string, boolean). Si el array contiene objetos, el spread copia las referencias: el array es nuevo, pero los objetos de dentro son los mismos.
 
@@ -140,30 +140,30 @@ console.log(array3);
 
 
 
-let array4: number|string //Si lo dejamos SIN parentesis o almacena Number o es String
+let array4: number | string //Si lo dejamos SIN parentesis o almacena Number o es String
 
-let array5: (number|string) // Si lo dejamos CON parentesis almacena Number y tambien String 
-
-
+let array5: (number | string) // Si lo dejamos CON parentesis almacena Number y tambien String 
 
 
-const user12: Usuario = {nombre: "Ana", direccion: {ciudad: "Cadiz"}}; 
 
-const use22: Usuario = {nombre:"Jose"} 
 
-let personas= [user12,use22]
+const user12: Usuario = { nombre: "Ana", direccion: { ciudad: "Cadiz" } };
 
-let copia_personas: Usuario[]=[]
+const use22: Usuario = { nombre: "Jose" }
+
+let personas = [user12, use22]
+
+let copia_personas: Usuario[] = []
 //copia un objeto que siempre se actualiza si se modifica despues.
 
 
 
 
 for (const p of personas) {
-    copia_personas.push({...p})
+  copia_personas.push({ ...p })
 }
 
-user12.nombre="jorge";
+user12.nombre = "jorge";
 
 console.log(personas);
 console.log(copia_personas);
@@ -172,10 +172,10 @@ console.log(copia_personas);
 
 console.log(personas);
 
-let array22:number[]=[1,2,3,4,5,6,7]
+let array22: number[] = [1, 2, 3, 4, 5, 6, 7]
 
 
-console.log(styleText('red',`Funciones para arrays, cadenas etc`));
+console.log(styleText('red', `Funciones para arrays, cadenas etc`));
 
 //Añade valor
 array22.push(3)
@@ -195,32 +195,32 @@ array22.shift()
 //Index of
 
 
-let array33:number[]=[1,2,3,4,5,6,7]
+let array33: number[] = [1, 2, 3, 4, 5, 6, 7]
 
 console.log(array33.indexOf(5));
 
 
-let frase:string=" lleva la tarra un vestido lleno de cascabeles"
+let frase: string = " lleva la tarra un vestido lleno de cascabeles"
 
 console.log(frase.indexOf("vestido"));
 
 
 //find
-        //Es una funcion que espera la respuesta de una función
+//Es una funcion que espera la respuesta de una función
 
 
 //map
 
 //Filter filtra los valores
-console.log(styleText("red","funcion filter"));
-let numerosfilter= [4,5,4,1,9,5,4,8]
+console.log(styleText("red", "funcion filter"));
+let numerosfilter = [4, 5, 4, 1, 9, 5, 4, 8]
 
-let aprobados = numerosfilter.filter((valor:number)=>{return valor>=5})
+let aprobados = numerosfilter.filter((valor: number) => { return valor >= 5 })
 console.log(aprobados.length);
 
 //findIndex
-let numeros123=[1,2,3,4,5,6];
-let numerosMayor10= numeros123.findIndex((valor:number)=>{return valor>3})
+let numeros123 = [1, 2, 3, 4, 5, 6];
+let numerosMayor10 = numeros123.findIndex((valor: number) => { return valor > 3 })
 console.log(numerosMayor10);
 
 
@@ -229,5 +229,35 @@ console.log(numerosMayor10);
 
 
 //reduce
+console.log(styleText("red", "Funcion reduce"));
+
+
+let numeros_reduce: number[] = [1, 2, 8, 4, 5];
+let numero_alto: number = numeros_reduce.reduce((acumulador, actual) => { return actual > acumulador ? acumulador = actual : acumulador })
+console.log(numero_alto);
+
+
+let numeros_slice = numeros_reduce.slice(2, 5);
+console.log(numeros_slice);
+
+
+// Tuplas de datos
+console.log(styleText("red", "Tupla de datos"));
+let nombreEdad: [string, number] = ["Juan", 18]
+
+let nombre_tuplas = nombreEdad [0];
+
+console.log(nombre_tuplas);
+
+
+type ProductoTupla=[nombre:string, precio:number]
+type ProductoObject={nombre:string, precio:number}
+
+let p1:ProductoTupla =["Champu",10]
+let p2:ProductoObject = {nombre:"pera", precio:10};
+
+
+console.log(p1);
+console.log(p2);
 
 
