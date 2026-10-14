@@ -11,5 +11,5 @@ console.log(modulo);
 
 console.log(`Matriculados: ${num_alumnos} de ${modulo.plazas_tot} \n
 Plazas Libres: ${modulo.plazas_tot - num_alumnos} \n
-Ocupación: ${num_alumnos>30?"No quedan plazas":((num_alumnos/modulo.plazas_tot)*100).toFixed(2)+"%"}\n`);
+Ocupación: ${num_alumnos>30?"No quedan plazas":((num_alumnos/modulo.plazas_tot)*100).toFixed(3)+"%"}\n`);
 

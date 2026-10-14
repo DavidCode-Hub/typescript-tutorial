@@ -1,0 +1,3 @@
+function calificar(nota:number) {
+    
+}
