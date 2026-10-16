@@ -1,3 +1,5 @@
+import { styleText } from "util"
+
 type Libro = { titulo: string, autor: string, anio: number, paginas: number, disponible: boolean }
 
 let catalogo: Libro[] = [{ titulo: "El Quijote", autor: "Cervantes", anio: 1605, paginas: 863, disponible: true },
@@ -6,7 +8,7 @@ let catalogo: Libro[] = [{ titulo: "El Quijote", autor: "Cervantes", anio: 1605,
 { titulo: "Nada", autor: "Carmen Laforet", anio: 1945, paginas: 288, disponible: true },
 { titulo: "Marianela", autor: "Galdós", anio: 1878, paginas: 240, disponible: false }]
 
-let listadisponibles: string[] = catalogo.filter(disponibles => { return disponibles.disponible }).map((libro) => { return libro.titulo })
+let listadisponibles: string[] = catalogo.filter((libros) => { return libros.disponible }).map((libro) => { return libro.titulo })
 //let titulos_disponibles=listadisponibles.map((libro)=>{return libro.titulo})
 
 console.log(listadisponibles.join(" | "));
@@ -19,7 +21,7 @@ function buscarPorAutor(lista: Libro[], autor: string): Libro | undefined {
     return lista.find(libro => libro.autor === autor)
 }
     let libro_autor= buscarPorAutor(catalogo, "Unamuno")?.titulo
-console.log(`Unamuno: ${libro_autor==undefined?"No encontrado":libro_autor}`);
+console.log(`Unamuno: ${libro_autor??"No encontrado"}`);
 
 //e
 
@@ -27,9 +29,15 @@ console.log(`Unamuno: ${libro_autor==undefined?"No encontrado":libro_autor}`);
      return lista.map((libro_prest)=>{libro_prest.titulo===titulo?libro_prest.disponible:false})
 }*/
 function prestar(lista: Libro[], titulo: string): Libro[] {
-  return lista.map(libro => libro.titulo === titulo ? { ...libro, disponible: false } : libro);
+  return lista.map((libro) =>{return libro.titulo === titulo ? { ...libro, disponible: false } : libro});
 }
 
 let nueva_lista:Libro[]|undefined= prestar(catalogo, "El Quijote");
 
+console.log(styleText("red" , "Catalogo de libros"));
+
+console.log(catalogo);
+console.log(styleText("red" , "Copia de libros cambiando estados"));
 console.log(nueva_lista);
+
+
