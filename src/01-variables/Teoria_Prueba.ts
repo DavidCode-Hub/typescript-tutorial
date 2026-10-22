@@ -54,11 +54,16 @@ console.log(`${nombre === "david" ? console.log("ha dado true") : console.log("h
 
 type Usuario = { nombre: string, direccion?: { ciudad: String } }; // Operador de acceso seguro permite escribir undefined al operador ?
 
+
+
 //Si queremos hacer una variable como opcional lo indicamos con "?"
 // Optional chaining `?.`: si `direccion` es undefined, devuelve undefined en vez de romper.
+
 const user1: Usuario = { nombre: "Ana", direccion: { ciudad: "Cadiz" } };
 
 const use2: Usuario = { nombre: "Jose" } // Si la variable/atributo de objeto es null o undifined en el campo donde esta el ? la devuelve undefined en vez de romper el programa.
+
+
 
 console.log(`Direccion de ana es: ${user1.direccion?.ciudad}` || "No se conoce");
 // ?? Evalua directamente si un atributo es undifined, null ( es como que lee la base absoluta de lo que se esta evaluando)
@@ -245,19 +250,190 @@ console.log(numeros_slice);
 console.log(styleText("red", "Tupla de datos"));
 let nombreEdad: [string, number] = ["Juan", 18]
 
-let nombre_tuplas = nombreEdad [0];
+let nombre_tuplas = nombreEdad[0];
 
 console.log(nombre_tuplas);
 
 
-type ProductoTupla=[nombre:string, precio:number]
-type ProductoObject={nombre:string, precio:number}
+type ProductoTupla = [nombre: string, precio: number]
+type ProductoObject = { nombre: string, precio: number }
 
-let p1:ProductoTupla =["Champu",10]
-let p2:ProductoObject = {nombre:"pera", precio:10};
+let p1: ProductoTupla = ["Champu", 10]
+let p2: ProductoObject = { nombre: "pera", precio: 10 };
 
 
 console.log(p1);
 console.log(p2);
+
+
+//Objetos
+//Type Se puede "heredar uno dentro de otro"
+
+type Direccion = { calle: string, numero: number };
+type Persona = { nombre_per1: string, apellidos: string, direccion: Direccion }
+let per1: Persona = { nombre_per1: "David", apellidos: "Seva Lara", direccion: { calle: "guardiola", numero: 20 } }
+
+//Desestructuracion
+// Extraccion de datos de Objetos.
+
+let { nombre_per1, apellidos } = per1;
+
+console.log(apellidos);
+
+
+// Enumerados como en JAVA
+
+enum DIA { LUNES = 1, MARTES, MIERCOLES, JUEVES, VIERNES }
+
+let dia = DIA.LUNES
+
+console.log(dia == DIA.LUNES ? "HOY ES LUNES" : "Hoy no es lunes");
+
+/* CUIDADO CON LOS ENUMERADOS YA QUE SI SE AÑADE UN NUEVO
+    ESTADO PODEMOS ENCONTRARNOS QUE CAMBIE DE POSICION EL 
+    ESTADO QUE ESTABAMOS EVALUANDO POSTERIORMENTE
+*/
+enum ESTADO_PEDIDO {
+  EN_REPARTO,
+  EN_PROCESO,
+  PENDIENTE,
+  EN_PREPARACION
+}
+let estadoPreparacion: ESTADO_PEDIDO = ESTADO_PEDIDO.EN_PREPARACION
+
+console.log(estadoPreparacion);
+
+
+//Patrones para Type
+
+type EMAIL = `${string}@${"gmail" | "outlook" | "hotmail"}.${"es" | "com"}`;
+
+//Interfaces 
+interface Usuario2 {
+  id: number, //Se le puede poner valores con readony => lo que hace es que solo se puede leer
+  nombre: string,
+  email: EMAIL
+}
+
+interface Empleado extends Usuario2 {
+  NUSS: number,
+  Edad: string,
+}
+
+let Empleado = { id: 12, nombre: "David", email: "jose@gmail.com", NUSS: 123, Edad: 23 };
+
+//Interfaces con funciones
+
+interface Interfaz_funcion {
+  id: number,
+  nombre: string,
+  email: EMAIL
+  edad: number
+  esMayorEdad: (edad: number) => void;
+}
+
+let u1: Interfaz_funcion = {
+  id: 1, nombre: "JOSE", email: "jose@gmail.com", esMayorEdad: (edad) => {
+    console.log(`${u1.edad >= 18 ? "Es mayor de edad" : ""}`);
+  },
+}
+
+
+// CLases de objetos
+
+class Coche {         //Los datos de los atributos de la clase tienen que estar inicializados sino 
+                      // esta inicializado en el constructor tiene que definirse cuando se declaran
+  marca: string;
+  modelo: string;
+  kilometros: number;
+  color: string;
+  
+   
+  constructor(marca: string, modelo: string, kilometros: number,color: string) { 
+   
+    this.marca=marca;
+    this.modelo=modelo;
+    this.kilometros= kilometros;
+    this.color= color;
+  }
+  
+  /**
+     * Si le pones la opcionalidad a un atributo tienes que ponerselo tambien en el constructor
+     * 
+     * marca: string;
+     * modelo: string;
+     * kilometros: number;
+     * color?: string;
+     * 
+     *  constructor(marca: string, modelo: string, kilometros: number,color?: string) { 
+     *      this.marca=marca;
+     *      this.modelo=modelo;
+     *      this.kilometros= kilometros;
+     *      this.color= color;
+     *  }
+     * 
+     * 
+     * 
+     */
+
+  get getMarca(){
+    return this.marca
+  }
+
+  set setMarca(marca:string){
+    this.marca = marca
+  }
+
+  toString(){
+    console.log(`${this.marca} ${this.modelo} ${this.kilometros}${this.color} `)
+  }
+
+  
+  
+}
+
+// Class con Herencia
+class CocheElectrico{        
+  
+  // Definicion de atributos sin inicializar.
+   
+  constructor(public marca: string, protected modelo: string, private kilometros: number, public color: string) { 
+    this.marca=marca;
+    this.modelo=modelo;
+    this.kilometros= kilometros;
+    this.color= color;
+  }
+  
+  
+
+  toString(){
+    console.log(`${this.marca} ${this.modelo} ${this.kilometros}${this.color} `)
+  }
+  
+}
+
+let coche1: Coche= new Coche ("Seat", "Toledo", 220000, "Rojo")
+
+
+
+//Clases de metodos estaticos
+
+class Utilidades{
+  static suma(a:number,b:number){return a+b}
+}
+console.log(Utilidades.suma(15,4));
+
+
+
+//Metodos para Objetos.    HAY QUE TERMINARLO
+class CocheUtilidades{
+  static contadorMatricula=0;
+  static creaCoche (marca:string, mmodelo:string, color:string){
+    this.contadorMatricula++;
+    return new Coche(marca, mmodelo, 0)
+  }
+}
+
+
 
 
