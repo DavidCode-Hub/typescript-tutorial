@@ -307,6 +307,9 @@ console.log(estadoPreparacion);
 //Patrones para Type
 
 type EMAIL = `${string}@${"gmail" | "outlook" | "hotmail"}.${"es" | "com"}`;
+type resenna= 1|2
+
+let numeroresenna: resenna= 1;
 
 //Interfaces 
 interface Usuario2 {
@@ -342,21 +345,23 @@ let u1: Interfaz_funcion = {
 // CLases de objetos
 
 class Coche {         //Los datos de los atributos de la clase tienen que estar inicializados sino 
-                      // esta inicializado en el constructor tiene que definirse cuando se declaran
+  // esta inicializado en el constructor tiene que definirse cuando se declaran
   marca: string;
   modelo: string;
   kilometros: number;
+  matricula:string;
   color: string;
-  
-   
-  constructor(marca: string, modelo: string, kilometros: number,color: string) { 
-   
-    this.marca=marca;
-    this.modelo=modelo;
-    this.kilometros= kilometros;
-    this.color= color;
+
+
+  constructor(marca: string, modelo: string, kilometros: number,matricula:string, color: string) {
+
+    this.marca = marca;
+    this.modelo = modelo;
+    this.kilometros = kilometros;
+    this.matricula=matricula;
+    this.color = color;
   }
-  
+
   /**
      * Si le pones la opcionalidad a un atributo tienes que ponerselo tambien en el constructor
      * 
@@ -371,67 +376,67 @@ class Coche {         //Los datos de los atributos de la clase tienen que estar 
      *      this.kilometros= kilometros;
      *      this.color= color;
      *  }
-     * 
-     * 
-     * 
      */
 
-  get getMarca(){
+  get getMarca() {
     return this.marca
   }
 
-  set setMarca(marca:string){
+  set setMarca(marca: string) {
     this.marca = marca
   }
 
-  toString(){
+  toString() {
     console.log(`${this.marca} ${this.modelo} ${this.kilometros}${this.color} `)
   }
 
-  
-  
+
+
 }
 
 // Class con Herencia
-class CocheElectrico{        
-  
-  // Definicion de atributos sin inicializar.
-   
-  constructor(public marca: string, protected modelo: string, private kilometros: number, public color: string) { 
-    this.marca=marca;
-    this.modelo=modelo;
-    this.kilometros= kilometros;
-    this.color= color;
-  }
-  
-  
+class CocheElectrico {
 
-  toString(){
+  // Definicion de atributos sin inicializar.
+
+  constructor(public marca: string, protected modelo: string, private kilometros: number, public color: string) {
+    this.marca = marca;
+    this.modelo = modelo;
+    this.kilometros = kilometros;
+    this.color = color;
+  }
+
+
+
+  toString() {
     console.log(`${this.marca} ${this.modelo} ${this.kilometros}${this.color} `)
   }
-  
+
 }
 
-let coche1: Coche= new Coche ("Seat", "Toledo", 220000, "Rojo")
+let coche1: Coche = new Coche("Seat", "Toledo", 220000, "Rojo")
 
 
 
 //Clases de metodos estaticos
 
-class Utilidades{
-  static suma(a:number,b:number){return a+b}
+class Utilidades {
+  static suma(a: number, b: number) { return a + b }
 }
-console.log(Utilidades.suma(15,4));
+console.log(Utilidades.suma(15, 4));
 
 
 
-//Metodos para Objetos.    HAY QUE TERMINARLO
-class CocheUtilidades{
-  static contadorMatricula=0;
-  static creaCoche (marca:string, mmodelo:string, color:string){
+//Metodos static para Objetos.    HAY QUE TERMINARLO
+class CocheUtilidades {
+  static contadorMatricula = 0;
+
+  static creaCoche(marca: string, modelo: string, color: string) {
     this.contadorMatricula++;
-    return new Coche(marca, mmodelo, 0)
+    return new Coche(marca, modelo, 0, `${this.contadorMatricula}A`,color)
   }
+
+
 }
 
 
