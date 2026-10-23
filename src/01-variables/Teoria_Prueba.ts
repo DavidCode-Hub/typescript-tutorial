@@ -414,7 +414,7 @@ class CocheElectrico {
 
 }
 
-let coche1: Coche = new Coche("Seat", "Toledo", 220000, "Rojo")
+//let coche1: Coche = new Coche("Seat", "Toledo", 220000, "Rojo")
 
 
 
