@@ -335,12 +335,12 @@ interface Interfaz_funcion {
   esMayorEdad: (edad: number) => void;
 }
 
-let u1: Interfaz_funcion = {
+/*let u1: Interfaz_funcion = {
   id: 1, nombre: "JOSE", email: "jose@gmail.com", esMayorEdad: (edad) => {
     console.log(`${u1.edad >= 18 ? "Es mayor de edad" : ""}`);
   },
 }
-
+*/
 
 // CLases de objetos
 
