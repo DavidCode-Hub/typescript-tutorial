@@ -311,6 +311,11 @@ type resenna= 1|2
 
 let numeroresenna: resenna= 1;
 
+
+
+
+
+
 //Interfaces 
 interface Usuario2 {
   id: number, //Se le puede poner valores con readony => lo que hace es que solo se puede leer
@@ -323,24 +328,21 @@ interface Empleado extends Usuario2 {
   Edad: string,
 }
 
+class Empleado2 implements Usuario2 {
+  constructor( public id: number,public  nombre: string, public email: EMAIL) {
+    
+  }
+}
+
+
 let Empleado = { id: 12, nombre: "David", email: "jose@gmail.com", NUSS: 123, Edad: 23 };
 
-//Interfaces con funciones
 
-interface Interfaz_funcion {
-  id: number,
-  nombre: string,
-  email: EMAIL
-  edad: number
-  esMayorEdad: (edad: number) => void;
-}
 
-/*let u1: Interfaz_funcion = {
-  id: 1, nombre: "JOSE", email: "jose@gmail.com", esMayorEdad: (edad) => {
-    console.log(`${u1.edad >= 18 ? "Es mayor de edad" : ""}`);
-  },
-}
-*/
+
+
+
+
 
 // CLases de objetos
 
@@ -390,31 +392,88 @@ class Coche {         //Los datos de los atributos de la clase tienen que estar 
     console.log(`${this.marca} ${this.modelo} ${this.kilometros}${this.color} `)
   }
 
+  arrancar(){
+    console.log("El coche ha arrancado "+this.modelo);
+    
+  }
 
 
 }
 
-// Class con Herencia
+
+
+
+
+
+// Class Objeto "Inicializado"
 class CocheElectrico {
 
   // Definicion de atributos sin inicializar.
 
-  constructor(public marca: string, protected modelo: string, private kilometros: number, public color: string) {
+  constructor(public marca: string, public modelo: string, public kilometros: number, public color: string) {
     this.marca = marca;
     this.modelo = modelo;
     this.kilometros = kilometros;
     this.color = color;
   }
 
-
-
   toString() {
     console.log(`${this.marca} ${this.modelo} ${this.kilometros}${this.color} `)
   }
 
+  
 }
 
-//let coche1: Coche = new Coche("Seat", "Toledo", 220000, "Rojo")
+
+
+
+
+
+
+//CLASE HERENCIA
+class CocheElectrico_herencia extends Coche {
+
+  // Definicion de atributos sin inicializar.
+
+  constructor( marca: string,  modelo: string,  kilometros: number,matricula:string, color: string, public bateria:number) {
+    super(marca,modelo, kilometros,matricula,color)
+    this.bateria=bateria;
+   
+  }
+
+  override arrancar():string{
+    return `${super.arrancar()} su bateria es de ${this.bateria}%`
+  }
+}
+
+class CocheCombustion_herencia extends Coche {
+
+  // Definicion de atributos sin inicializar.
+
+  constructor( marca: string,  modelo: string,  kilometros: number,matricula:string, color: string, public combustible:number) {
+    super(marca,modelo, kilometros,matricula,color)
+    this.combustible=combustible;
+   
+  }
+
+  override arrancar():string{
+    return `${super.arrancar()} su bateria es de ${this.combustible}litros`
+  }
+}
+
+let coche1 = new Coche("SEAT", "ATECA", 1111111,"1234ABC", "negro");
+
+let coche_herencia= new CocheElectrico_herencia("PEUGEOT", "302",123456,"5678DGV","blanco",20);
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -427,7 +486,7 @@ console.log(Utilidades.suma(15, 4));
 
 
 
-//Metodos static para Objetos.    HAY QUE TERMINARLO
+//Metodos static para Objetos.   
 class CocheUtilidades {
   static contadorMatricula = 0;
 
