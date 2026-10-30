@@ -77,6 +77,9 @@ console.log("con ?? ->", cantidad ?? 99); // 0   (0 no es null ni undefined)
 
 
 
+
+
+
 //Spred --> "Construccion"
 const numeros = [1, 2, 3];
 const masNumeros = [...numeros, 4, 5]; // copia + añade
@@ -98,6 +101,13 @@ console.log("desestructurando array ->", primero, segundo);
 
 
 
+
+
+
+
+
+
+
 // Desestructuración de objeto (así se reciben props en Angular/JS moderno)
 const { nombre: nombreUsuario, edad: edadUsuario } = base;
 console.log("desestructurando objeto ->", nombreUsuario, edadUsuario);
@@ -115,11 +125,21 @@ console.log("Datos separados nombre:", nombre_persona2, "edad:", edad_persona2);
 
 console.log(styleText("red", "For Of, for In"));
 
+
+
+
+
 // for...of : recorre VALORES
 const frutas = ["manzana", "pera", "plátano"];
 for (const fruta of frutas) {
   console.log(`for...of -> ${fruta}`);
 }
+
+
+
+
+
+
 
 // for...in : recorre CLAVES (índices o propiedades)
 for (const indice in frutas) {
@@ -132,18 +152,24 @@ const array2d: number[][] = [
 ];
 
 
+
+
+
+
+
 // unir con "..." sirve para array, objetos, cadenas... etc
 let array1: number[] = [1, 2, 3, 4, 5]
 let array2: number[] = [6, 7, 8, 9, 0]
 
 let array3: number[] = [...array1, ...array2];
 
+
+
+
 //La regla anterior vale con primitivos (number, string, boolean). Si el array contiene objetos, el spread copia las referencias: el array es nuevo, pero los objetos de dentro son los mismos.
 
 
 console.log(array3);
-
-
 
 let array4: number | string //Si lo dejamos SIN parentesis o almacena Number o es String
 
@@ -430,6 +456,8 @@ class CocheElectrico {
 
 
 
+
+
 //CLASE HERENCIA
 class CocheElectrico_herencia extends Coche {
 
@@ -486,6 +514,7 @@ console.log(Utilidades.suma(15, 4));
 
 
 
+
 //Metodos static para Objetos.   
 class CocheUtilidades {
   static contadorMatricula = 0;
@@ -501,3 +530,57 @@ class CocheUtilidades {
 
 
 
+
+
+
+//Clases Genericas de utilidad
+interface Coche_interfce{ 
+  marca:string
+  modelo:string
+  color:string
+  bastidor:string
+  matricula:string
+}
+
+//PARTIAL   Permite la no utilización de todos los atributos de una interface
+
+type FormCoche= Partial<Coche_interfce>
+
+let datosFormularioCoche:FormCoche={marca:"SEAT", modelo:"Arona", color:"Gris", bastidor:"1235234ASDAV", matricula:"1234ABC"}
+
+let datosFormulariosCoche_Nuevo:FormCoche= {color:"Azul", matricula:"3456BCF"}
+
+//REQUIRED    Todos los atributos tiene que estar rellenos si o si.
+
+type FormCoche_Required=Required<Coche_interfce>
+
+let datosFormularioCoche_required:FormCoche={marca:"SEAT", modelo:"Arona", color:"Gris", bastidor:"1235234ASDAV", matricula:"1234ABC"}
+
+
+//PICK      Se elige el que tu quieres que este obligatoriamente.
+
+type FormCoche_Pick=Pick<Coche_interfce, "color" | "matricula" | "modelo">
+
+let datosFormularioCoche_Pick:FormCoche={marca:"SEAT", modelo:"Arona", color:"Gris", bastidor:"1235234ASDAV", matricula:"1234ABC"}
+
+
+//OMIT      Se elige el que no quieras que se necesite
+
+type FormCoche_Omit=Omit<Coche_interfce, "bastidor">
+
+let datosFormularioCoche_Omit:FormCoche_Omit={marca:"SEAT", modelo:"Arona", color:"Gris", matricula:"1234ABC"}
+
+console.log(datosFormularioCoche_Omit)
+
+let {color, ...otrosDatos}=datosFormularioCoche_Omit
+
+console.log(color)
+console.log(otrosDatos);
+
+
+
+//Prueba array de objetos con desestrucuracion 
+
+class Persona_Util{
+  constructor(public nombre:string, public edad:number)
+}
