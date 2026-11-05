@@ -580,7 +580,7 @@ console.log(otrosDatos);
 
 
 //Prueba array de objetos con desestrucuracion 
-
+/*
 class Persona_Util{
   constructor(public nombre:string, public edad:number)
-}
+}*/
