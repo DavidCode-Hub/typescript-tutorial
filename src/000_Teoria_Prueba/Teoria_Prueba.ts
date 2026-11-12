@@ -502,9 +502,6 @@ let coche_herencia= new CocheElectrico_herencia("PEUGEOT", "302",123456,"5678DGV
 
 
 
-
-
-
 //Clases de metodos estaticos
 
 class Utilidades {
@@ -584,3 +581,6 @@ console.log(otrosDatos);
 class Persona_Util{
   constructor(public nombre:string, public edad:number)
 }*/
+
+
+

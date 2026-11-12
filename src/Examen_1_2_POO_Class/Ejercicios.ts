@@ -75,7 +75,7 @@ class GestionTaller{
     }
 
     public static cambiarEstado(id:number, nuevo:EstadoReparacion){
-        return this.reparaciones.map((id_reparacion)=>{return id_reparacion.id?id_reparacion.estado=nuevo:false})
+        return this.reparaciones.map((id_reparacion)=>{return id_reparacion.id==id?id_reparacion.estado=nuevo:false})
     }
 
 }
