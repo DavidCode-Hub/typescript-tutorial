@@ -1,0 +1,415 @@
+==============================================================
+ EJERCICIOS DE PRACTICA - TYPESCRIPT (Examen del jueves)
+==============================================================
+ 4 ejercicios, 10 puntos cada uno.
+ Hazlos sin mirar los apuntes y compara tu salida con la
+ "salida esperada" CARACTER POR CARACTER.
+
+
+##############################################################
+ EJERCICIO 1: LA PLATAFORMA DE STREAMING (10 ptos)
+ Fichero: src/practica/ej1-streaming.ts
+##############################################################
+
+a) (0,5) Define un type Genero que solo admita
+   "accion" | "comedia" | "drama" | "terror".
+   Define un type Serie con: id (numero, SOLO LECTURA), titulo,
+   genero (Genero), temporadas (numero), valoracion (numero,
+   OPCIONAL) y reparto (array de textos).
+   Crea el array catalogo: Serie[]:
+
+   id | titulo     | genero  | temporadas | valoracion    | reparto
+   ---+------------+---------+------------+---------------+------------------
+   1  | Nocturnia  | accion  | 3          | 8.5           | Ana, Luis
+   2  | Risas      | comedia | 5          | 7             | Marta
+   3  | El Faro    | terror  | 1          | (sin valorar) | Pablo, Sara, Ivan
+   4  | Capital    | drama   | 4          | 9             | Luis, Elena
+   5  | Brujula    | accion  | 2          | (sin valorar) | (vacio)
+
+b) (1) Recorre el catalogo con for...of DESESTRUCTURANDO cada serie
+   en la cabecera del bucle. Muestra "#id titulo [genero] - valoracion".
+   Si no tiene valoracion, muestra "Sin valorar"
+   (SIN if ni operador ternario).
+
+
+c) (1) Calcula la valoracion media SOLO de las series valoradas
+   (filter + reduce) con 2 decimales.
+
+d) (0,5) Calcula con reduce el total de temporadas del catalogo.
+
+e) (0,5) Muestra en una linea los titulos de las series de accion,
+   separados por ", ".
+
+f) (1) Escribe buscarSerie(lista, id), que devuelva la serie o
+   undefined. Usala para mostrar el titulo de la serie 3 y de la 9
+   (si no existe, "No existe", con ?. y ??). Usa tambien findIndex
+   para mostrar la posicion de "Capital".
+
+g) (1) Escribe valorar(lista, id, nota), que devuelva un ARRAY NUEVO
+   con esa serie valorada (usa map y spread). El original NO debe
+   modificarse. Valora la serie 3 con un 6 y muestra su valoracion
+   en el nuevo y en el original.
+
+h) (0,5) Escribe extremos(lista), que devuelva una TUPLA
+   [string, string] con el titulo de la serie con mas temporadas y
+   el de la que menos tiene. Recogela con desestructuracion.
+
+i) (1) Obten la lista de actores SIN REPETIR de todo el catalogo.
+   Usa reduce, spread e includes. Muestra cuantos son y sus nombres.
+
+j) (1) Muestra los titulos ordenados por temporadas de mayor a menor
+   sin alterar catalogo. Para comprobarlo, muestra despues el titulo
+   de su primer elemento.
+
+k) (0,5) Con reduce, crea un objeto que cuente cuantas series hay de
+   cada genero (Record<string, number>) y recorrelo con for...in.
+
+l) (0,5) Parte de: let cola: string[] = ["Capital"];
+   Haz push("Risas"), unshift("Nocturnia"), guarda lo que devuelve
+   shift() y lo que devuelve pop(), y muestra la cola resultante y
+   su longitud.
+
+m) (0,5) Con slice, muestra los titulos de las 2 primeras series y
+   de las 2 ultimas (con indice negativo).
+
+SALIDA ESPERADA:
+----------------------------------------------------------
+#1 Nocturnia [accion] - 8.5
+#2 Risas [comedia] - 7
+#3 El Faro [terror] - Sin valorar
+#4 Capital [drama] - 9
+#5 Brujula [accion] - Sin valorar
+Valoracion media: 8.17
+Total de temporadas: 15
+Series de accion: Nocturnia, Brujula
+Serie 3: El Faro
+Serie 9: No existe
+Posicion de Capital: 3
+El Faro -> nueva: 6 | original: Sin valorar
+Mas temporadas: Risas | Menos temporadas: El Faro
+Reparto (7): Ana, Luis, Marta, Pablo, Sara, Ivan, Elena
+Por temporadas: Risas, Capital, Nocturnia, Brujula, El Faro | Primera del catalogo: Nocturnia
+accion: 2
+comedia: 1
+terror: 1
+drama: 1
+Primero: Nocturnia | Ultimo: Risas | Cola: Capital | Longitud: 1
+Primeras 2: Nocturnia, Risas | Ultimas 2: Capital, Brujula
+----------------------------------------------------------
+
+
+##############################################################
+ EJERCICIO 2: LOS PEDIDOS DE LA CAFETERIA (10 ptos)
+ Fichero: src/practica/ej2-cafeteria.ts
+##############################################################
+
+a) (1) Define todos estos tipos:
+   - enum Estado { Pendiente, EnPreparacion, Listo, Entregado }
+   - type Tamano = "pequeno" | "mediano" | "grande"
+   - type Email con TEMPLATE LITERAL TYPE: `${string}@${string}`
+   - interface Producto: readonly id: number, nombre: string,
+     precio: number, descuento?: number (porcentaje).
+   - interface Bebida extends Producto: anade tamano: Tamano y
+     caliente: boolean.
+   - type Cliente = { nombre: string; email: Email } y
+     type Fidelidad = { puntos: number }.
+     Crea type ClienteFidelizado = Cliente & Fidelidad.
+   - interface Pedido: id: number, cliente: ClienteFidelizado,
+     lineas: [Bebida, number][] (tupla bebida + cantidad),
+     estado: Estado, nota?: string.
+
+   Crea estas bebidas y este pedido:
+
+   id | nombre    | precio | descuento | tamano  | caliente
+   ---+-----------+--------+-----------+---------+---------
+   1  | Cafe solo | 1.5    | (no)      | pequeno | si
+   2  | Latte     | 2.5    | 10        | mediano | si
+   3  | Frappe    | 4      | (no)      | grande  | no
+
+   Pedido n.1 de Elena (elena@cafe.es, 120 puntos): 2 cafes solos,
+   1 latte y 3 frappes, en estado Pendiente y sin nota.
+
+b) (0,5) Escribe precioFinal(b: Bebida): number aplicando el
+   descuento si lo hay (usa ??, sin if). Muestra con for...of el
+   precio final de cada bebida con 2 decimales.
+
+c) (1,5) Escribe totalPedido(p: Pedido): number usando reduce y
+   DESESTRUCTURANDO la tupla [bebida, cantidad].
+
+d) (0,5) Escribe aplicarPropina(total: number, porcentaje: number = 5):
+   number (parametro POR DEFECTO). Llamala sin porcentaje y con 12.
+
+e) (0,5) Escribe unirNombres(...nombres: string[]): string (REST
+   PARAMETERS) que una los nombres con " + ". Usala pasando los
+   nombres de las bebidas del pedido con spread.
+
+f) (1,5) Escribe avanzarEstado(p: Pedido): Pedido, que devuelva un
+   PEDIDO NUEVO (spread) con el estado siguiente. El ultimo estado
+   se queda como esta. Avanza dos veces y muestra el nombre del
+   estado (Estado[n]) y su valor numerico, en el nuevo y en el
+   original.
+
+g) (1,5) Utility types:
+   - type CambiosBebida = Partial<Omit<Bebida, "id">>
+   - type ResumenBebida = Pick<Bebida, "nombre" | "precio">
+   - type BebidaCompleta = Required<Bebida>
+   Escribe actualizarBebida(b: Bebida, cambios: CambiosBebida): Bebida.
+   Cambia el precio del Frappe a 3.5 y muestra el precio nuevo y el
+   original. Anade COMENTADAS dos lineas que den error y explica el
+   error de cada una: modificar id de una bebida, y crear una
+   BebidaCompleta sin descuento.
+
+h) (0,5) Escribe masCara(lista: Bebida[]): [string, number] que
+   devuelva nombre y precio final de la mas cara. Recogela
+   desestructurando.
+
+i) (0,5) Muestra la nota del pedido en mayusculas con ?. y, si no
+   hay, "SIN NOTA" con ??. Muestra tambien los puntos del cliente.
+
+j) (0,5) Escribe parsearCantidad(valor: unknown): number: si es
+   numero lo devuelve, si es string lo convierte con Number, y en
+   cualquier otro caso devuelve 0. Pruebala con "3", 2 y null.
+
+k) (1,5) Con filter + map + join muestra las bebidas calientes.
+   Con includes comprueba si el array ["Latte", "Mocca"] contiene el
+   nombre de la segunda bebida. Con findIndex obten la posicion del
+   Latte en el array de bebidas.
+
+SALIDA ESPERADA:
+----------------------------------------------------------
+Cafe solo: 1.50 EUR
+Latte: 2.25 EUR
+Frappe: 4.00 EUR
+Total pedido: 17.25 EUR
+Con propina (5%): 18.11 EUR
+Con propina (12%): 19.32 EUR
+Pedido: Cafe solo + Latte + Frappe
+Estado nuevo: Listo (2) | original: Pendiente (0)
+Frappe -> nuevo: 3.5 | original: 4
+Mas cara: Frappe (4.00 EUR)
+Nota: SIN NOTA | Puntos de Elena: 120
+Cantidades: 3 | 2 | 0
+Calientes: Cafe solo, Latte
+Latte en la lista?: true
+Posicion de Latte: 1
+----------------------------------------------------------
+(El simbolo EUR puedes escribirlo como el simbolo del euro.)
+
+
+##############################################################
+ EJERCICIO 3: ALQUILER DE VEHICULOS (10 ptos)
+ Fichero: src/practica/ej3-alquiler.ts
+##############################################################
+
+Desarrolla un programa para una empresa de alquiler. Implementa
+este diagrama de clases:
+
+  <<Interface>> Alquilable
+     + calcularPrecio(dias: number): number
+     + ficha(): string
+            ^  implements
+  <<abstract>> Vehiculo
+     + id: number (solo lectura)
+     + marca: string
+     + modelo: string
+     + estado: EstadoVehiculo
+     + cambiarEstado(estado): void
+     + calcularPrecio(dias): number   (abstracto)
+     + ficha(): string
+            ^  extends                       ^  extends
+  <<class>> Coche                    <<class>> Furgoneta
+     - precioDia: number                - precioDia: number
+     - seguroIncluido: boolean          - cargaKg: number
+     + calcularPrecio(dias)             + calcularPrecio(dias)
+     + ficha(): string                  + ficha(): string
+
+--------------------------------------------------------------
+PARTE A: MODELADO (4 ptos)
+--------------------------------------------------------------
+Interfaz Alquilable (0,5): define los dos metodos.
+
+Clase abstracta Vehiculo (1,5):
+ - EstadoVehiculo puede ser: "disponible", "alquilado" o "taller".
+ - Su constructor recibe id (solo lectura), marca y modelo. El
+   estado EMPIEZA en "disponible" (no va en el constructor).
+ - cambiarEstado(nuevo) cambia el estado.
+ - calcularPrecio(dias) es ABSTRACTO.
+ - ficha() devuelve "#1 Seat Ibiza - disponible"
+   (id, marca, modelo y estado).
+
+Clase Coche (1): recibe ademas precioDia y seguroIncluido (ambos
+PRIVADOS). calcularPrecio(dias) = precioDia x dias, mas 8 EUR por
+dia si NO tiene seguro incluido. ficha() anade " . SEGURO" a la del
+padre si lo tiene; si no, devuelve la del padre tal cual.
+
+Clase Furgoneta (1): recibe ademas precioDia y cargaKg (privados).
+calcularPrecio(dias) = precioDia x dias, mas 50 EUR fijos si la
+carga supera los 1000 kg. ficha() siempre anade " . {cargaKg} kg".
+
+--------------------------------------------------------------
+PARTE B: CLASE ESTATICA Flota (4 ptos)
+--------------------------------------------------------------
+  <<class>> Flota
+     - vehiculos: Vehiculo[]
+     - ultimoId: number
+     + registrarCoche(): Coche
+     + registrarFurgoneta(): Furgoneta
+     + listar(): Vehiculo[]
+     + buscar(id): Vehiculo | undefined
+     + cambiarEstado(id, nuevo): boolean
+     + porEstado(estado): Vehiculo[]
+     + ingresosPrevistos(dias): number
+
+ - vehiculos (privada, estatica, array vacio) y ultimoId (privada,
+   estatica, empieza en 0).
+ - registrarCoche(marca, modelo, precioDia, seguro = false) y
+   registrarFurgoneta(marca, modelo, precioDia, cargaKg):
+   incrementan el id, crean el vehiculo, lo guardan en el array y
+   lo devuelven.
+ - listar() devuelve una COPIA.
+ - buscar(id) devuelve el vehiculo o undefined.
+ - cambiarEstado(id, nuevo) devuelve true, o false si no existe.
+ - porEstado(estado) devuelve los vehiculos en ese estado.
+ - ingresosPrevistos(dias) suma el precio para "dias" dias SOLO de
+   los vehiculos alquilados.
+ - RECUERDA: las clases estaticas NO tienen constructor.
+
+--------------------------------------------------------------
+PARTE C: TESTING (2 ptos)
+--------------------------------------------------------------
+Usando SOLO los metodos de Flota:
+ 1. Registra: Coche Seat Ibiza (30 EUR/dia, sin seguro), Coche
+    Toyota Yaris (40 EUR/dia, con seguro), Furgoneta Renault Master
+    (55 EUR/dia, 1200 kg), Furgoneta Ford Transit (50 EUR/dia,
+    900 kg).
+ 2. Muestra la ficha de todos.
+ 3. Muestra el precio de cada vehiculo para 3 dias en una linea,
+    separados por " | ".
+ 4. Cambia el vehiculo 1 a alquilado, el 2 a alquilado, el 3 a
+    taller y el 9 a alquilado, mostrando lo que devuelve cada
+    llamada.
+ 5. Deja COMENTADAS, con el error del compilador, estas tres
+    lineas: cambiar un vehiculo al estado "perdido", hacer
+    new Vehiculo(...), y leer coche.precioDia desde fuera.
+ 6. Muestra cuantos vehiculos hay alquilados, cuantos en taller y
+    los ingresos previstos para 3 dias.
+ 7. Busca los vehiculos 3 y 7 y muestra su ficha. Si no existe,
+    "No existe", SIN if ni ternario.
+
+SALIDA ESPERADA:
+----------------------------------------------------------
+#1 Seat Ibiza - disponible
+#2 Toyota Yaris - disponible . SEGURO
+#3 Renault Master - disponible . 1200 kg
+#4 Ford Transit - disponible . 900 kg
+Precios 3 dias: 114 | 120 | 215 | 150
+Cambiar #1 a alquilado -> true
+Cambiar #2 a alquilado -> true
+Cambiar #3 a taller -> true
+Cambiar #9 a alquilado -> false
+Alquilados: 2
+En taller: 1
+Ingresos previstos (3 dias): 234.00 EUR
+Buscar #3 -> #3 Renault Master - taller . 1200 kg
+Buscar #7 -> No existe
+----------------------------------------------------------
+(Donde pone " . " usa el punto medio " · " como en el examen de tu
+profesor, y EUR = simbolo del euro.)
+
+
+##############################################################
+ EJERCICIO 4: PREDICE LA SALIDA Y CAZA LOS ERRORES (10 ptos)
+##############################################################
+Sin ejecutar nada, escribe que imprime cada bloque (o si da error
+de compilacion y por que). Despues compruebalo en el Playground:
+https://www.typescriptlang.org/play
+
+4.1 (1,5) Operadores y falsy:
+
+    console.log(0 ?? 5, 0 || 5, "" ?? "x", "" || "x");
+    console.log(null ?? undefined ?? "z");
+    console.log(Boolean([]), Boolean(""), Boolean("0"), Boolean(NaN));
+
+4.2 (1,5) var, let y const:
+
+    for (var i = 0; i < 3; i++) {}
+    console.log(i);
+    for (let j = 0; j < 3; j++) {}
+    console.log(j);
+    const lista = [1, 2];
+    lista.push(3);
+    lista = [4];
+
+4.3 (2) Copias y mutacion:
+
+    const a = [3, 1, 2];
+    const b = a;
+    const c = [...a];
+    b.push(4);
+    c.sort();
+    console.log(a, c);
+    console.log([10, 9, 1].sort());
+    console.log([10, 9, 1].sort((x, y) => x - y));
+
+4.4 (1) for in vs for of:
+
+    const letras = ["a", "b"];
+    for (const x in letras) console.log(x);
+    for (const x of letras) console.log(x);
+
+4.5 (2) Encuentra TODOS los errores, explicalos y corrigelos:
+
+    interface Moto {
+      readonly matricula: string;
+      marca: string;
+      cilindrada?: number;
+    }
+
+    const m: Moto = { matricula: "1234ABC", marca: "Honda" };
+    m.matricula = "9999ZZZ";
+    const doble: number = m.cilindrada * 2;
+    let tipo: "naked" | "custom" = "scooter";
+    const dato: unknown = "hola";
+    console.log(dato.length);
+    const par: [string, number] = ["a", 1, true];
+    enum Dia { Lunes = 1, Martes }
+    console.log(Dia.Martes, Dia[1]);
+
+    En la ultima linea no hay error, pero que imprime?
+
+4.6 (2) Escribe TU un trozo de codigo que use Partial, Pick y Omit
+    sobre Moto, y explica en un comentario que hace cada uno.
+
+
+##############################################################
+ QUE CUBRE CADA EJERCICIO DE TUS APUNTES
+##############################################################
+ let / const / var, undefined, null, unknown, any ... 4.2, 4.5, 2-j
+ ??, ?., truthy/falsy, ternario ..................... 1-b, 1-f, 2-b, 2-i, 4.1
+ Template strings, toFixed .......................... todos
+ type, opcionales, union, literales, template literal 1-a, 2-a
+ Spread, desestructuracion, &, readonly ............. 1-b, 1-g, 2-a, 2-f
+ push/pop/shift/unshift/slice/sort/length ........... 1-l, 1-m, 1-j, 4.3
+ for of / for in .................................... 1-b, 1-k, 4.4
+ Funciones (opcional, default, rest, arrow) ......... 2-d, 2-e
+ find/findIndex/map/filter/includes/reduce .......... ej. 1 y 2
+ Tuplas ............................................. 1-h, 2-a, 2-h
+ Enums .............................................. 2-a, 2-f, 4.5
+ Interfaces (extends, readonly, opcional) ........... 2-a, ej. 3
+ Clases, abstract, implements, static, private ...... ej. 3
+ Utility types ...................................... 2-g, 4.6
+
+
+##############################################################
+ CONSEJOS PARA EL EXAMEN
+##############################################################
+ - Copia el array antes de sort: [...lista].sort(...)
+ - sort() sin funcion ordena como TEXTO ([10, 9, 1] -> [1, 10, 9]).
+ - Para filtrar valores opcionales usa !== undefined, no if (x).
+ - toFixed(2) devuelve un string.
+ - Si dice "sin if ni ternario" -> piensa en ?? y ?.
+ - Las clases estaticas: todo "static", sin constructor.
+ - Tipos de union de literales = el compilador te protege de
+   valores no permitidos (error al asignar "perdida", etc.).
+
+ Mucha suerte el jueves!
