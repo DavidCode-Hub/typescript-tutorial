@@ -37,7 +37,11 @@ function filtrar(lista:Videojuego[], plataforma:string, precioMax?:number) {
 console.log(`${filtrar(catalogo, "PS5", 50)}`);
 
 function rebajar(lista:Videojuego[], titulo:string, procentaje:number) {
-   return [...lista].filter((obj)=>{return obj.titulo==titulo}).map((a)=>{return {titulo: a.titulo, plataforma: a.plataforma, precio: 30, stock: a.stock, anio: a.anio }})
+    let copia= [...lista].filter((obj)=>{return obj.titulo==titulo}).map((a)=>{return {titulo: a.titulo, plataforma: a.plataforma, precio: 30, stock: a.stock, anio: a.anio }})
+    return copia
 }
 
-console.log(rebajar(catalogo, "Elden Ring",10));
+console.log(`Antiguo ${rebajar(catalogo, "Elden Ring",10)}`);
+
+
+console.log(catalogo);
