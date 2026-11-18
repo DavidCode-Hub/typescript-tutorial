@@ -27,3 +27,4 @@ let media_media=media.reduce((acc, act)=>{return acc+=act.valoracion! },0)
 
 let resultado= (media_media/media.length).toFixed(2)
 console.log(resultado);
+
